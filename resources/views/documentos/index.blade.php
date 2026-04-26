@@ -97,7 +97,7 @@
 
         <!-- PAGINACIÓN -->
         <div class="mt-3">
-            {{ $documentos->appends(request()->query())->links() }}
+            {{ $documentos->appends(request()->query())->links('pagination::bootstrap-5') }}
         </div>
 
     </div>
