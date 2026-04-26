@@ -8,7 +8,9 @@
         <h5>📋 Inventario de Documentos</h5>
         <small>Total: {{ $documentos->total() }} registros activos</small>
     </div>
+
     <div class="card-body">
+
         <!-- Formulario de búsqueda -->
         <form method="GET" action="{{ route('documentos.index') }}" class="mb-4">
             <div class="row g-3">
@@ -40,14 +42,15 @@
                     <input type="date" name="fecha_hasta" class="form-control" value="{{ request('fecha_hasta') }}">
                 </div>
                 <div class="col-md-2">
-                    <button type="submit" class="btn btn-primary w-100">🔍 Buscar</button>
+                    <button type="submit" class="btn btn-primary">🔍 Buscar</button>
                 </div>
                 <div class="col-md-2">
-                    <a href="{{ route('documentos.index') }}" class="btn btn-secondary w-100">🗑️ Limpiar</a>
+                    <a href="{{ route('documentos.index') }}" class="btn btn-secondary">🗑️ Limpiar</a>
                 </div>
             </div>
         </form>
 
+        <!-- TABLA -->
         <div class="table-responsive">
             <table class="table table-bordered table-striped table-hover">
                 <thead class="table-dark">
@@ -63,6 +66,7 @@
                         <th>Detalle</th>
                     </tr>
                 </thead>
+
                 <tbody>
                     @forelse($documentos as $doc)
                     <tr>
@@ -82,48 +86,6 @@
                             </button>
                         </td>
                     </tr>
-
-                    <!-- Modal de Detalle -->
-                    <div class="modal fade" id="modal{{ $doc->id }}" tabindex="-1">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header bg-info text-white">
-                                    <h5 class="modal-title">Detalle del Documento</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <strong>📁 Carpeta:</strong> {{ $doc->nro_carpeta }}<br>
-                                            <strong>👤 Nombre:</strong> {{ $doc->persona?->nombre_completo ?? 'N/D' }}<br>
-                                            <strong>🆔 CI:</strong> {{ $doc->persona?->ci ?? 'N/D' }}<br>
-                                            <strong>🎫 N° Boleta:</strong> {{ $doc->nro_boleta ?? 'N/D' }}<br>
-                                            <strong>💰 Importe Depósito:</strong> Bs {{ number_format($doc->importe_deposito, 2) }}<br>
-                                            <strong>📅 Fecha Depósito:</strong> {{ $doc->fecha_deposito?->format('d/m/Y') ?? 'N/D' }}<br>
-                                            <strong>🕒 Hora:</strong> {{ $doc->hora_deposito ?? 'N/D' }}
-                                        </div>
-                                        <div class="col-md-6">
-                                            <strong>📍 Manzano/Lote:</strong> {{ $doc->cod_manzano }}/{{ $doc->cod_lote }}<br>
-                                            <strong>📄 Contrato:</strong> {{ $doc->tipo_contrato ?? 'N/D' }}<br>
-                                            <strong>📐 Superficie:</strong> {{ number_format($doc->superficie_m2 ?? 0, 2) }} m²<br>
-                                            <strong>💰 Valor m²:</strong> Bs {{ number_format($doc->valor_por_m2, 2) }}<br>
-                                            <strong>💵 Importe Contrato:</strong> Bs {{ number_format($doc->importe_contrato ?? 0, 2) }}<br>
-                                            <strong>📅 Fecha Contrato:</strong> {{ $doc->fecha_contrato?->format('d/m/Y') ?? 'N/D' }}<br>
-                                            <strong>📝 Folio:</strong> {{ $doc->nro_folio ?? 'N/D' }}
-                                        </div>
-                                        <div class="col-12 mt-3">
-                                            <strong>📌 Observaciones:</strong> {{ $doc->observaciones ?? 'Ninguna' }}<br>
-                                            <strong>📂 Archivo Origen:</strong> {{ $doc->archivo_origen ?? 'N/D' }}<br>
-                                            <small class="text-muted">🕒 Importado: {{ $doc->created_at->format('d/m/Y H:i:s') }}</small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     @empty
                     <tr>
                         <td colspan="9" class="text-center">No se encontraron documentos</td>
@@ -133,9 +95,62 @@
             </table>
         </div>
 
+        <!-- PAGINACIÓN -->
         <div class="mt-3">
             {{ $documentos->appends(request()->query())->links() }}
         </div>
+
     </div>
 </div>
+
+<!-- MODALES (FUERA DE LA TABLA) -->
+@foreach($documentos as $doc)
+<div class="modal fade" id="modal{{ $doc->id }}" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title">Detalle del Documento</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>📁 Carpeta:</strong> {{ $doc->nro_carpeta }}<br>
+                        <strong>👤 Nombre:</strong> {{ $doc->persona?->nombre_completo ?? 'N/D' }}<br>
+                        <strong>🆔 CI:</strong> {{ $doc->persona?->ci ?? 'N/D' }}<br>
+                        <strong>🎫 N° Boleta:</strong> {{ $doc->nro_boleta ?? 'N/D' }}<br>
+                        <strong>💰 Importe Depósito:</strong> Bs {{ number_format($doc->importe_deposito, 2) }}<br>
+                        <strong>📅 Fecha Depósito:</strong> {{ $doc->fecha_deposito?->format('d/m/Y') ?? 'N/D' }}<br>
+                        <strong>🕒 Hora:</strong> {{ $doc->hora_deposito ?? 'N/D' }}
+                    </div>
+
+                    <div class="col-md-6">
+                        <strong>📍 Manzano/Lote:</strong> {{ $doc->cod_manzano }}/{{ $doc->cod_lote }}<br>
+                        <strong>📄 Contrato:</strong> {{ $doc->tipo_contrato ?? 'N/D' }}<br>
+                        <strong>📐 Superficie:</strong> {{ number_format($doc->superficie_m2 ?? 0, 2) }} m²<br>
+                        <strong>💰 Valor m²:</strong> Bs {{ number_format($doc->valor_por_m2, 2) }}<br>
+                        <strong>💵 Importe Contrato:</strong> Bs {{ number_format($doc->importe_contrato ?? 0, 2) }}<br>
+                        <strong>📅 Fecha Contrato:</strong> {{ $doc->fecha_contrato?->format('d/m/Y') ?? 'N/D' }}<br>
+                        <strong>📝 Folio:</strong> {{ $doc->nro_folio ?? 'N/D' }}
+                    </div>
+
+                    <div class="col-12 mt-3">
+                        <strong>📌 Observaciones:</strong> {{ $doc->observaciones ?? 'Ninguna' }}<br>
+                        <strong>📂 Archivo Origen:</strong> {{ $doc->archivo_origen ?? 'N/D' }}<br>
+                        <small class="text-muted">
+                            🕒 Importado: {{ $doc->created_at->format('d/m/Y H:i:s') }}
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+
 @endsection

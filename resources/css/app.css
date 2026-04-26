@@ -53,3 +53,34 @@
 .flex.justify-between.flex-1 {
     margin-top: 0;
 }
+
+/* 🔥 FIX DEFINITIVO PAGINACIÓN */
+.pagination {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 4px !important;
+    flex-wrap: wrap;
+}
+
+.pagination .page-item {
+    width: auto !important;
+}
+
+.pagination .page-link {
+    width: auto !important;
+    padding: 4px 10px !important;
+    font-size: 13px !important;
+    line-height: 1.2 !important;
+}
+
+/* 🔥 FIX FLECHAS (< >) */
+.pagination .page-link svg {
+    width: 12px !important;
+    height: 12px !important;
+}
+
+/* 🔥 FIX GLOBAL (ESTO ES LO QUE TE FALTABA) */
+a, button {
+    width: auto !important;
+    padding: initial !important;
+}
