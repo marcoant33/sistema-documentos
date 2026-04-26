@@ -92,8 +92,7 @@
         }
 
         .table th {
-            background-color: #f1f3f5;
-            font-weight: 600;
+            font-weight: 600
         }
 
         .table-responsive {
@@ -158,9 +157,9 @@
             <!-- Sidebar -->
             <div class="col-md-2 sidebar p-0 position-relative">
                 <div class="logo-main">
-                    <img src="{{ asset('images/logo-sistema.png') }}" alt="SIGEDOC-INM"
-                         onerror="this.src='https://via.placeholder.com/150x60?text=SIGEDOC-INM'">
-                    <h5>SIGEDOC-INM</h5>
+                    <img src="{{ asset('images/logo-sistema.png') }}"
+                         onerror="this.style.display='none'">
+                    <h5>SIGEDOC-GAMU</h5>
                     <p>Inventario Documental</p>
                 </div>
 
@@ -172,15 +171,15 @@
                 </nav>
 
                 <div class="footer-logo">
-                    <img src="{{ asset('images/logo-empresa.png') }}" alt="Mi Empresa"
+                    <img src="{{ asset('images/logo-empresa.png') }}"
                          onerror="this.style.display='none'">
-                    <div>© {{ date('Y') }} Mi Empresa</div>
-                    <div>Creado por: Tu Nombre</div>
+                    <div>© {{ date('Y') }} HADASOFT</div>
+                    <div>Desarrollado por: Marco Villca</div>
                 </div>
 
-                <div class="position-absolute bottom-0 w-100 text-center p-2 mb-2">
+                {{-- <div class="position-absolute bottom-0 w-100 text-center p-2 mb-2">
                     <div class="badge-solo-lectura">Modo Solo Lectura</div>
-                </div>
+                </div> --}}
             </div>
 
             <!-- Contenido -->

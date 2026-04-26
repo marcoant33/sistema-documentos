@@ -5,7 +5,7 @@
 @section('content')
 <div class="card">
     <div class="card-header bg-primary text-white">
-        <h5>📋 Inventario de Documentos</h5>
+        <h5>Inventario de Documentos</h5>
         <small>Total: {{ $documentos->total() }} registros activos</small>
     </div>
 
@@ -53,7 +53,7 @@
         <!-- TABLA -->
         <div class="table-responsive">
             <table class="table table-bordered table-striped table-hover">
-                <thead class="table-dark">
+                <thead class="table-primary">
                     <tr>
                         <th>N° Carpeta</th>
                         <th>Nombre</th>
