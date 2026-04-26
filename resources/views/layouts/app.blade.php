@@ -49,7 +49,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 30px;
+            font-size: 27px;
         }
 
         .sidebar .nav-link span {
@@ -191,7 +191,7 @@
 
                 <div class="footer-logo">
                     <img src="{{ asset('images/LOGITO.png') }}" alt="HADASOFT"
-                    style="max-height: 70px;
+                    style="max-height: 65px;
                          onerror="this.style.display='none'">
                     <div>© {{ date('Y') }} HADASOFT</div>
                     <div>Desarrollado por: Marco Villca</div>
