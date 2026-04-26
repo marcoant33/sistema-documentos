@@ -1,3 +1,87 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'datatables.net-bs5/css/dataTables.bootstrap5.min.css';
+/* Paginación compacta */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 0.25rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.pagination .page-item {
+    list-style: none;
+}
+
+.pagination .page-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 14px;
+    font-size: 15px;
+    line-height: 1.4 !important;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    background-color: #fff;
+    color: #0d6efd;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.pagination .page-link:hover {
+    background-color: #e9ecef;
+}
+
+.pagination .active .page-link {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    color: #fff;
+}
+
+.pagination .disabled .page-link {
+    color: #6c757d;
+    pointer-events: none;
+    background-color: #fff;
+}
+
+/* Flechas más pequeñas */
+.pagination .page-link svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+/* Eliminar espacios extra en la barra de paginación */
+.flex.justify-between.flex-1 {
+    margin-top: 0;
+}
+
+/* 🔥 FIX DEFINITIVO PAGINACIÓN */
+.pagination {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 4px !important;
+    flex-wrap: wrap;
+}
+
+.pagination .page-item {
+    width: auto !important;
+}
+
+.pagination .page-link {
+    width: auto !important;
+    padding: 4px 10px !important;
+    font-size: 13px !important;
+    line-height: 1.2 !important;
+}
+
+/* 🔥 FIX FLECHAS (< >) */
+.pagination .page-link svg {
+    width: 12px !important;
+    height: 12px !important;
+}
+
+/* 🔥 FIX GLOBAL (ESTO ES LO QUE TE FALTABA) */
+a, button {
+    width: auto !important;
+    padding: initial !important;
+}
